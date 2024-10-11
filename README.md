@@ -205,6 +205,7 @@ sourve .env
 ![image](https://github.com/user-attachments/assets/96e34067-568e-4f8b-b19f-fc6f5721b9ee)
 
 **문제 원인**
+
 crontab이 root 계정에서 실행되고, local_hash.txt 파일을 root 권한으로 생성한 후, ubuntu 사용자가 이를 읽거나 수정하려고 하면 권한 문제로 인해 변경 사항이 반영되지 않을 수 있습니다.
 
 root와 ubuntu 계정 간의 권한 충돌로 인해 ubuntu 계정에서 파일을 접근하거나 수정하지 못하는 경우, 해시값 비교에서 항상 일치하지 않는 문제로 보일 수 있습니다.
