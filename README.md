@@ -1,7 +1,13 @@
 # 🚀 Jenkins & AWS S3 CI/CD Pipeline
 
+## :raising_hand: 팀원
+
+| <img src="https://github.com/yuwankang.png" width="80"> | <img src="https://github.com/recoild.png" width="80"> | <img src="https://github.com/jeonguk0201.png" width="80"> | <img src="https://github.com/cshharry.png" width="80"> |
+|:---:|:---:|:---:|:---:|
+| [강유완](https://github.com/yuwankang) | [안재형](https://github.com/recoild) | [이정욱](https://github.com/jeonguk0201) | [조성현](https://github.com/cshharry) |
+
 ## 📋 개요
-이 프로젝트는 **Jenkins**와 **AWS S3**를 이용하여 CI/CD 파이프라인을 구축하는 방법을 설명합니다. 
+이 프로젝트는 **Jenkins**와 **AWS S3**를 이용하여 **CI/CD** 파이프라인을 구축 및 **EC2***를 통한 서비스 구동
 전체 파이프라인은 다음과 같은 단계로 이루어집니다:
 
 1. 🔗 **Jenkins와 GitHub 간 웹훅 연결**
@@ -9,9 +15,10 @@
 3. ⚙️ **Spring Boot 애플리케이션과 AWS RDS 연동**
 4. ☁️ **AWS CLI를 이용한 Jenkins의 S3 연동**
 5. 📦 **빌드된 JAR 파일을 S3에 업로드**
-6. 📜 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 실행**
+6. 📜 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**
+7. 📢 **슬랙 알림 설정**
 
-이 파이프라인은 개발자가 소스 코드를 GitHub에 푸시하면, Jenkins가 이를 감지하고 자동으로 애플리케이션을 빌드하여 S3에 업로드하는 작업을 자동화합니다. 이 과정을 통해 개발 주기 동안 일관된 배포가 가능해집니다.
+> 이 파이프라인은 개발자가 소스 코드를 GitHub에 푸시하면, Jenkins가 이를 감지하고 자동으로 애플리케이션을 빌드하여 S3에 업로드하는 작업을 자동화합니다. 이 과정을 통해 개발 주기 동안 일관된 배포가 가능해집니다.
 
 ---
 
