@@ -6,9 +6,10 @@
 
 1. 🔗 **Jenkins와 GitHub 간 웹훅 연결**
 2. 🌍 **ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**
-3. ⚙️ **Spring Boot 애플리케이션과 DB 연동**
+3. ⚙️ **Spring Boot 애플리케이션과 AWS RDS 연동**
 4. ☁️ **AWS CLI를 이용한 Jenkins의 S3 연동**
 5. 📦 **빌드된 JAR 파일을 S3에 업로드**
+6. 📦 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 실행**
 
 이 파이프라인은 개발자가 소스 코드를 GitHub에 푸시하면, Jenkins가 이를 감지하고 자동으로 애플리케이션을 빌드하여 S3에 업로드하는 작업을 자동화합니다. 이 과정을 통해 개발 주기 동안 일관된 배포가 가능해집니다.
 
@@ -101,6 +102,7 @@ pipeline {
         
         stage('Copy jar') { 
             steps {
+                sh 'aws s3 cp build/libs/step18_empApp-0.0.1-SNAPSHOT.jar s3://ce27-jenkins --acl public-read'
                 sh 'aws s3 cp hash.txt s3://ce27-jenkins --acl public-read'
             }
         }
