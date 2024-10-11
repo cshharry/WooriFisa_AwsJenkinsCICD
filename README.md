@@ -209,7 +209,7 @@ fi
 ![image (21)](https://github.com/user-attachments/assets/9daec7b1-7d6f-44bc-a724-a0b35dada423)
 ```bash
 vi .env
-sourve .env
+source .env
 ```
 ![image](https://github.com/user-attachments/assets/2a87ec2a-b0f2-4fdd-b927-64ceba1a86fc)
 ### 예전 해쉬값 불러오는 현상
