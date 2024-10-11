@@ -102,6 +102,7 @@ pipeline {
         
         stage('Copy jar') { 
             steps {
+                sh 'aws s3 cp build/libs/step18_empApp-0.0.1-SNAPSHOT.jar s3://ce27-jenkins --acl public-read'
                 sh 'aws s3 cp hash.txt s3://ce27-jenkins --acl public-read'
             }
         }
