@@ -93,18 +93,49 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'chmod +x ./gradlew'  
-                sh './gradlew bootJar'
-                sh "echo $WORKSPACE"
-                sh 'md5sum build/libs/step18_empApp-0.0.1-SNAPSHOT.jar > hash.txt'
+                // dir('01.java/SpringApp') {  
+                    sh 'chmod +x ./gradlew'  
+                    sh './gradlew bootJar'
+                    sh "echo $WORKSPACE"  
+                    
+                    sh 'md5sum build/libs/step18_empApp-0.0.1-SNAPSHOT.jar > hash.txt'
+                // }
             }
         }
         
-        stage('Copy jar') { 
+         stage('Copy jar') { 
             steps {
-                sh 'aws s3 cp build/libs/step18_empApp-0.0.1-SNAPSHOT.jar s3://ce27-jenkins --acl public-read'
-                sh 'aws s3 cp hash.txt s3://ce27-jenkins --acl public-read'
+                // script {
+                //     // def jarFile = '01.java/SpringApp/build/libs/step18_empApp-0.0.1-SNAPSHOT.jar'                   
+                //     // sh "cp ${jarFile} /var/jenkins_home/appjar/"
+                // }
+                sh 'aws s3 cp build/libs/step18_empApp-0.0.1-SNAPSHOT.jar s3://ce27-jenkins --acl public-read' 
+                
+                sh 'aws s3 cp hash.txt s3://ce27-jenkins  --acl public-read' 
             }
+        }
+    }
+    post {
+        always {
+            slackSend(
+                tokenCredentialId: 'token',
+                color: '#FFFF00',
+                message: "빌드 완료: ${env.JOB_NAME} [${env.BUILD_NUMBER}]"
+            )
+        }
+        success {
+            slackSend(
+                tokenCredentialId: 'token',
+                color: '#00FF00',
+                message: "빌드 성공: ${env.JOB_NAME} [${env.BUILD_NUMBER}]"
+            )
+        }
+        failure {
+            slackSend(
+                tokenCredentialId: 'token',
+                color: '#FF0000',
+                message: "빌드 실패: ${env.JOB_NAME} [${env.BUILD_NUMBER}]"
+            )
         }
     }
 }
