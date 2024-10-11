@@ -9,7 +9,7 @@
 3. ⚙️ **Spring Boot 애플리케이션과 AWS RDS 연동**
 4. ☁️ **AWS CLI를 이용한 Jenkins의 S3 연동**
 5. 📦 **빌드된 JAR 파일을 S3에 업로드**
-6. 📦 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 실행**
+6. 📜 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 실행**
 
 이 파이프라인은 개발자가 소스 코드를 GitHub에 푸시하면, Jenkins가 이를 감지하고 자동으로 애플리케이션을 빌드하여 S3에 업로드하는 작업을 자동화합니다. 이 과정을 통해 개발 주기 동안 일관된 배포가 가능해집니다.
 
@@ -18,7 +18,7 @@
 ## 🗺️ 아키텍처 구조
 CI/CD 파이프라인의 아키텍처는 아래와 같습니다:
 
-![image (10)](https://github.com/user-attachments/assets/46cef3ff-e523-4ff8-85cd-c3868559e26c)
+![화면 캡처 2024-10-11 160435](https://github.com/user-attachments/assets/676478be-2c90-4cbb-ab58-bdc08a0e8b28)
 
 ---
 
@@ -170,7 +170,9 @@ S3에 있는 모든 파일이 로컬 디렉토리로 다운로드됩니다. 위 
 
 ---
 
-## Crontab과 shell 스크립트를 활용한 자동화
+## 🚀 Crontab과 Shell 스크립트를 활용한 자동화
+### 📜 스크립트 설명
+
 ```bash
 #!/bin/bash
 
@@ -231,25 +233,29 @@ fi
 
 ![image (20)](https://github.com/user-attachments/assets/1b7bf86b-4fac-4186-99ed-46436f7b7420)
 
+### 🕑 Crontab 설정
+
 ![image (19)](https://github.com/user-attachments/assets/dbf57b85-d319-46ef-9318-74baf1bb788d)
 ```bash
 * * * * * /home/ubuntu/aws_study/s3_deploy.sh > /home/ubuntu/aws_study/crontab.log 2>&1
 ```
 
-## Jenkins 파이프 빌드 알람 설정(slack Notification)
-> 토큰 생성 및 앱 추가
+## 📢 Jenkins 파이프라인 Slack 알림 설정
+
+1. **Slack 토큰 생성 및 앱 추가** 
 ![image](https://github.com/user-attachments/assets/2b748b35-84c7-4eb4-b6ea-2e18e504060d)
 
-> Jenkins 관리 -> System -> Secret text -> 통합 토큰 자격 증명 ID 입력
+2. **Jenkins 관리 -> System -> Secret text -> 통합 토큰 자격 증명 ID 입력**
 ![](https://velog.velcdn.com/images/yuwankang/post/7f0d49f9-ee6b-4143-9e1a-2ccc1b5f397b/image.png)
 
 ![](https://velog.velcdn.com/images/yuwankang/post/7d920b11-62f9-4eeb-b4e7-159b7b37fb39/image.png)
-### 성공
+
+3. **성공 시 Slack 알림**  
 ![](https://velog.velcdn.com/images/yuwankang/post/23afc166-06fc-484f-9275-28e4870b7f44/image.png)
 
 
-## Trouble Shooting
-### AWS RDS 사용시 탈취 방지를 위한 수정
+## 🛠 Trouble Shooting
+### AWS RDS 사용시 보안 수정
 ![image (21)](https://github.com/user-attachments/assets/9daec7b1-7d6f-44bc-a724-a0b35dada423)
 ```bash
 vi .env
@@ -275,5 +281,6 @@ Jenkins와 AWS S3를 연동하여 CI/CD 파이프라인을 구축하고, Spring 
 2. **ngrok**을 사용하여 로컬에서 실행 중인 Jenkins가 GitHub 웹훅을 받을 수 있도록 설정되었습니다.
 3. Jenkins는 **Spring Boot** 애플리케이션을 빌드하고, 데이터베이스와 연동된 상태에서 JAR 파일을 생성합니다.
 4. 생성된 JAR 파일은 **AWS CLI**를 통해 **AWS S3** 버킷에 업로드됩니다.
+5. **Slack 알림**을 설정하여 빌드 성공, 실패 시 개발 팀이 즉각적으로 상태를 확인할 수 있습니다. 이를 통해 팀이 신속하게 문제를 대응할 수 있습니다.
 
-CI/CD 파이프라인은 개발과 배포 사이의 간격을 줄이고, 자동화를 통해 개발 주기의 효율성을 극대화할 수 있었습니다.
+CI/CD 파이프라인은 개발과 배포 사이의 간격을 줄이고, 자동화를 통해 개발 주기의 효율성을 극대화했습니다. Slack 알림을 통해 실시간으로 빌드 상태를 확인함으로써 개발 과정에서의 투명성과 반응 속도 또한 향상되었습니다.
