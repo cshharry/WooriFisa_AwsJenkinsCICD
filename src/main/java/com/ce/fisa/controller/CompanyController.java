@@ -36,7 +36,7 @@ public class CompanyController {
 	
 	@GetMapping("helloworld")
 	public String echo() {
-		return "helloworld2";
+		return "helloworld3";
 	}
 	
 	@ExceptionHandler
