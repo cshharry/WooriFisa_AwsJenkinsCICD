@@ -136,6 +136,70 @@ S3에 있는 모든 파일이 로컬 디렉토리로 다운로드됩니다. 위 
 
 ---
 
+## Crontab과 shell 스크립트를 활용한 자동화
+```bash
+BUCKET_NAME="s3://ce27-jenkins"            # S3 버킷명
+LOCAL_DIR="/home/ubuntu/aws_study"          # 로컬 디렉토리 경로
+HASH_FILE="${LOCAL_DIR}/hash.txt"           # 동기화한 hash.txt 파일 경로
+TEMP_HASH_FILE="${LOCAL_DIR}/temp_hash.txt" # 기존 해시 파일의 임시 위치
+JAR_FILE="step18_empApp-0.0.1-SNAPSHOT.jar" # 실행할 JAR 파일명
+
+# 1. AWS S3 버킷과 현재 폴더 동기화
+echo "[$(date)] S3 버킷과 로컬 디렉토리 동기화 중..."
+aws s3 cp "$BUCKET_NAME/hash.txt" "$LOCAL_DIR"
+aws s3 sync "$BUCKET_NAME" "$LOCAL_DIR"
+
+# 2. S3에서 동기화한 hash.txt 파일의 해시값 계산
+if [ -f "$HASH_FILE" ]; then
+  # S3에서 동기화한 hash.txt 파일의 해시값 계산
+  REMOTE_HASH=$(md5sum "$HASH_FILE" | awk '{print $1}')
+
+  # 기존 로컬 hash.txt 파일이 있는지 확인 후 해시값 계산 (없으면 빈 문자열)
+  if [ -f "$TEMP_HASH_FILE" ]; then
+    LOCAL_HASH=$(md5sum "$TEMP_HASH_FILE" | awk '{print $1}')
+  else
+    LOCAL_HASH=""
+  fi
+
+  # 3. 해시값 비교 및 명령어 수행
+  if [ "$REMOTE_HASH" != "$LOCAL_HASH" ]; then
+    # 기존 로컬 hash.txt 파일을 새로운 해시값으로 업데이트
+    cp "$HASH_FILE" "$TEMP_HASH_FILE"
+
+    # 기존 실행 중인 Java 애플리케이션 프로세스 종료
+    echo "[$(date)] 기존 Java 애플리케이션 프로세스 종료 중..."
+    pkill -f "$JAR_FILE"
+
+    # Java 애플리케이션 재실행
+    echo "[$(date)] 해시값이 일치하지 않음: Java 애플리케이션 재시작 중..."
+    nohup java -jar "$LOCAL_DIR/$JAR_FILE" &
+
+    echo "[$(date)] Java 애플리케이션이 재시작되었습니다. S3에서 동기화한 hash.txt의 해시값($REMOTE_HASH)이 기존 해시값($LOCAL_HASH)과 일치하지 않았습니다."
+  else
+    echo "[$(date)] 해시값이 일치하여 Java 애플리케이션을 재시작하지 않았습니다."
+  fi
+else
+  echo "[$(date)] S3에서 동기화한 hash.txt 파일이 존재하지 않습니다."
+fi
+```
+
+![image (20)](https://github.com/user-attachments/assets/1b7bf86b-4fac-4186-99ed-46436f7b7420)
+
+![image (19)](https://github.com/user-attachments/assets/dbf57b85-d319-46ef-9318-74baf1bb788d)
+```bash
+* * * * * /home/ubuntu/aws_study/s3_deploy.sh > /home/ubuntu/aws_study/crontab.log 2>&1
+```
+
+## Trouble Shooting
+### AWS RDS 사용시 탈취 방지를 위한 수정
+![image (21)](https://github.com/user-attachments/assets/9daec7b1-7d6f-44bc-a724-a0b35dada423)
+```bash
+vi .env
+sourve .env
+```
+![image](https://github.com/user-attachments/assets/2a87ec2a-b0f2-4fdd-b927-64ceba1a86fc)
+
+
 ## ✅ 결론
 
 Jenkins와 AWS S3를 연동하여 CI/CD 파이프라인을 구축하고, Spring Boot 애플리케이션을 자동으로 빌드 및 배포하는 과정을 자동화했습니다.
