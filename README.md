@@ -143,7 +143,8 @@ pipeline {
 
 ### 파이프 라인 구축 완료
 
-![](https://velog.velcdn.com/images/yuwankang/post/b6d645bb-e171-4414-9dec-c3da0a5a8ff8/image.png)
+![image](https://github.com/user-attachments/assets/09829d67-b15d-421e-9283-bb43bec6b098)
+
 
 ---
 
@@ -234,6 +235,18 @@ fi
 ```bash
 * * * * * /home/ubuntu/aws_study/s3_deploy.sh > /home/ubuntu/aws_study/crontab.log 2>&1
 ```
+
+## Jenkins 파이프 빌드 알람 설정(slack Notification)
+> 토큰 생성 및 앱 추가
+![image](https://github.com/user-attachments/assets/2b748b35-84c7-4eb4-b6ea-2e18e504060d)
+
+> Jenkins 관리 -> System -> Secret text -> 통합 토큰 자격 증명 ID 입력
+![](https://velog.velcdn.com/images/yuwankang/post/7f0d49f9-ee6b-4143-9e1a-2ccc1b5f397b/image.png)
+
+![](https://velog.velcdn.com/images/yuwankang/post/7d920b11-62f9-4eeb-b4e7-159b7b37fb39/image.png)
+### 성공
+![](https://velog.velcdn.com/images/yuwankang/post/23afc166-06fc-484f-9275-28e4870b7f44/image.png)
+
 
 ## Trouble Shooting
 ### AWS RDS 사용시 탈취 방지를 위한 수정
