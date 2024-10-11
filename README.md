@@ -11,11 +11,11 @@
 
 1. 🔗 [**Jenkins와 GitHub 간 웹훅 연결**](#️-jenkins-docker-설치)
 2. 🌍 [**ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**](#-ngrok-연동)
-3. ⚙️ [**Spring Boot 애플리케이션과 AWS RDS 연동**]
-4. ☁️ [**AWS CLI를 이용한 Jenkins의 S3 연동**]
-5. 📦 [**빌드된 JAR 파일을 S3에 업로드**]
-6. 📜 [**S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**]
-7. 📢 [**Jenkins 슬랙 알림 설정**]
+3. ⚙️ [**Spring Boot 애플리케이션과 AWS RDS 연동**](#-aws-cli-설치-및-jenkins-연동)
+4. ☁️ [**AWS CLI를 이용한 Jenkins의 S3 연동**](#-aws-cli-연동)
+5. 📦 [**빌드된 JAR 파일을 S3에 업로드**](#-aws-cli-연동)
+6. 📜 [**S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**](#-crontab과-shell-스크립트를-활용한-자동화)
+7. 📢 [**Jenkins 슬랙 알림 설정**](#-jenkins-파이프라인-slack-알림-설정)
 
 ---
 
