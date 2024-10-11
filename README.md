@@ -1,4 +1,4 @@
-# 🚀 Jenkins & AWS S3 CI/CD Pipeline
+# 🚀 Jenkins & AWS CI/CD Pipeline
 
 ## :raising_hand: 팀원
 
@@ -7,18 +7,20 @@
 | [강유완](https://github.com/yuwankang) | [안재형](https://github.com/recoild) | [이정욱](https://github.com/jeonguk0201) | [조성현](https://github.com/cshharry) |
 
 ## 📋 개요
-**Jenkins**와 **AWS S3**를 이용하여 **CI/CD** 파이프라인을 구축 및 **EC2***를 통한 서비스 구동
-전체 파이프라인은 다음과 같은 단계로 이루어집니다:
-1. 🔗 **Jenkins와 GitHub 간 웹훅 연결**
-2. 🌍 **ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**
-3. ⚙️ **Spring Boot 애플리케이션과 AWS RDS 연동**
-4. ☁️ **AWS CLI를 이용한 Jenkins의 S3 연동**
-5. 📦 **빌드된 JAR 파일을 S3에 업로드**
-6. 📜 **S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**
-7. 📢 **슬랙 알림 설정**
+**Jenkins**와 **AWS S3**를 이용하여 **CI/CD** 파이프라인을 구축해 개발과 배포 사이의 간격을 줄이고 동화를 통해 개발 주기의 효율성을 극대화하고, **EC2**를 통한 서비스를 구동합니다. 전체 파이프라인은 다음과 같은 단계로 이루어집니다:
+
+1. 🔗 [**Jenkins와 GitHub 간 웹훅 연결**](#jenkins-github-연동)
+2. 🌍 [**ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**](#ngrok-연동)
+3. ⚙️ [**Spring Boot 애플리케이션과 AWS RDS 연동**](#aws-cli-설치-및-jenkins-연동)
+4. ☁️ [**AWS CLI를 이용한 Jenkins의 S3 연동**](#aws-cli-설치-및-jenkins-연동)
+5. 📦 [**빌드된 JAR 파일을 S3에 업로드**](#aws-cli-설치-및-jenkins-연동)
+6. 📜 [**S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**](#aws-cli-설치-및-jenkins-연동)
+7. 📢 [**Jenkins 슬랙 알림 설정**](#jenkins-파이프라인-slack-알림-설정)
+
+---
 
 ## 🛠️ 기술 스택
-> 이 프로젝트에서는 다음과 같은 기술 스택을 사용하여 CI/CD 파이프라인을 구축하고 애플리케이션을 배포하였습니다:
+> 다음과 같은 기술 스택을 사용하여 CI/CD 파이프라인을 구축하고 애플리케이션을 배포하였습니다:
 
 - 1. 🐋 **Docker Jenkins**를 컨테이너화하여 관리 및 실행 환경을 표준화
 - 2. 🧩 **Jenkins	CI/CD** 파이프라인을 자동화하고 GitHub와 연동하여 빌드를 관리
