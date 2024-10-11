@@ -9,13 +9,13 @@
 ## 📋 개요
 **Jenkins**와 **AWS S3**를 이용하여 **CI/CD** 파이프라인을 구축해 개발과 배포 사이의 간격을 줄이고 동화를 통해 개발 주기의 효율성을 극대화하고, **EC2**를 통한 서비스를 구동합니다. 전체 파이프라인은 다음과 같은 단계로 이루어집니다:
 
-1. 🔗 [**Jenkins와 GitHub 간 웹훅 연결**](#Jenkins-Docker-설치)
-2. 🌍 [**ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**](#ngrok-연동)
-3. ⚙️ [**Spring Boot 애플리케이션과 AWS RDS 연동**](#aws-cli-설치-및-jenkins-연동)
-4. ☁️ [**AWS CLI를 이용한 Jenkins의 S3 연동**](#aws-cli-설치-및-jenkins-연동)
-5. 📦 [**빌드된 JAR 파일을 S3에 업로드**](#aws-cli-설치-및-jenkins-연동)
-6. 📜 [**S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**](#aws-cli-설치-및-jenkins-연동)
-7. 📢 [**Jenkins 슬랙 알림 설정**](#jenkins-파이프라인-slack-알림-설정)
+1. 🔗 [**Jenkins와 GitHub 간 웹훅 연결**](#%F0%9F%9B%A0-jenkins-docker-%EC%84%A4%EC%B9%98)
+2. 🌍 [**ngrok으로 로컬 Jenkins를 외부에서 접근 가능하게 설정**]
+3. ⚙️ [**Spring Boot 애플리케이션과 AWS RDS 연동**]
+4. ☁️ [**AWS CLI를 이용한 Jenkins의 S3 연동**]
+5. 📦 [**빌드된 JAR 파일을 S3에 업로드**]
+6. 📜 [**S3에 업로드한 해쉬값을 비교하여 최신 버전 판별 후 EC2 실행**]
+7. 📢 [**Jenkins 슬랙 알림 설정**]
 
 ---
 
